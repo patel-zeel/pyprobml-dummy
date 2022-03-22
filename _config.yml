@@ -14,7 +14,7 @@ launch_buttons:
   colab_url: "https://colab.research.google.com"
 
 repository:
-  url: https://github.com/probml/pyprobml
+  url: https://github.com/patel-zeel/pyprobml-fork
   branch: notebook_first_trial
   
 parse:
