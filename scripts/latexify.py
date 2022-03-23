@@ -6,10 +6,14 @@ DEFAULT_HEIGHT = DEFAULT_WIDTH * GOLDEN_MEAN
 # SPLINE_COLOR = 'gray'
 
 
-def latexify(n_figures=1, fig_width=DEFAULT_WIDTH, fig_height=DEFAULT_HEIGHT):
-
-    if n_figures > 1:
-        fig_width = fig_width / n_figures
+def latexify(scale_factor=1, fig_width=None, fig_height=None):
+    """
+    scaele_factor: float, with this factor the figure will be scaled
+    fig_width: float, width of the figure in inches (if this is specified, scale_factor is ignored)
+    fig_height: float, height of the figure in inches
+    """
+    if fig_width is None:
+        fig_width = DEFAULT_WIDTH / scale_factor
 
     # use TrueType fonts so they are embedded
     # https://stackoverflow.com/questions/9054884/how-to-embed-fonts-in-pdfs-produced-by-matplotlib
@@ -34,21 +38,3 @@ def latexify(n_figures=1, fig_width=DEFAULT_WIDTH, fig_height=DEFAULT_HEIGHT):
     plt.rc("text", usetex=True)
     plt.rc("font", family="serif")
     plt.rc("figure", figsize=(fig_width, fig_height))
-
-
-# latexify: https://nipunbatra.github.io/blog/visualisation/2014/06/02/latexify.html
-def format_axes(ax):
-    for spine in ["top", "right"]:
-        ax.spines[spine].set_visible(False)
-
-    for spine in ["left", "bottom"]:
-        # ax.spines[spine].set_color(SPINE_COLOR)
-        ax.spines[spine].set_linewidth(0.5)
-
-    ax.xaxis.set_ticks_position("bottom")
-    ax.yaxis.set_ticks_position("left")
-
-    # for axis in [ax.xaxis, ax.yaxis]:
-    #     axis.set_tick_params(direction='out', color=SPINE_COLOR)
-
-    return ax
