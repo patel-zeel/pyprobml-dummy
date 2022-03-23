@@ -256,6 +256,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">jax</span>
 <span class="k">except</span><span class="p">:</span>
@@ -268,13 +269,19 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="k">except</span><span class="p">:</span>
     <span class="o">%</span><span class="k">pip</span> install matplotlib
     <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="o">%</span><span class="k">pip</span> install seaborn
+    <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set this to False manually if running this notebook locally in stand-alone mode (without cloning the repo). </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set this to False manually if running this notebook locally in stand-alone mode (without cloning the repo).</span>
 <span class="c1"># When nb_shell = False, figures will not be saved to disk.</span>
 
 <span class="n">dev_mode</span> <span class="o">=</span> <span class="s2">&quot;DEV_MODE&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span>
@@ -284,9 +291,9 @@ const thebe_selector_output = ".output, .cell_output"
 
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../scripts&quot;</span><span class="p">)</span>
     <span class="kn">import</span> <span class="nn">pyprobml_utils</span> <span class="k">as</span> <span class="nn">pml</span>
-    <span class="kn">from</span> <span class="nn">latexify</span> <span class="kn">import</span> <span class="n">latexify</span><span class="p">,</span> <span class="n">format_axes</span>
+    <span class="kn">from</span> <span class="nn">latexify</span> <span class="kn">import</span> <span class="n">latexify</span>
 
-    <span class="n">latexify</span><span class="p">(</span><span class="n">n_figures</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fig_height</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">latexify</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fig_height</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -305,8 +312,8 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">dev_mode</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">save_name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">format_axes</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
         <span class="n">pml</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_name</span><span class="p">)</span>
 
 
@@ -325,6 +332,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="demo">
 <h2>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h2>
+<p>You can see different examples of discrete distributions by changing the seed in the following demo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span>
@@ -341,7 +349,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "c91b7608d7d443a0be8d8d1a3fbb03a5", "version_major": 2, "version_minor": 0}
+{"model_id": "ebbdeff0f3794d7da7664ba408148b87", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 </div>
