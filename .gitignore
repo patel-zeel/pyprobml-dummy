@@ -4,7 +4,7 @@ scripts/.DS_Store
 
 *.mp4
 *.png
-*.pdf
+# *.pdf
 *.jpg
 *.jpeg
 
