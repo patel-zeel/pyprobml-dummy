@@ -39,7 +39,8 @@ def save_fig(fname, *args, **kwargs):
     fname_full = os.path.join(figdir, fname)
     print("saving image to {}".format(fname_full))
 
-    plt.savefig(fname_full, *args, **kwargs)
+    # plt.tight_layout()
+    plt.savefig(fname_full, bbox_inches="tight", *args, **kwargs)
 
 
 def savefig(fname, *args, **kwargs):
@@ -158,7 +159,7 @@ def kdeg(x, X, h):
     Xhat = X.reshape(D, 1, N)
     xhat = x.reshape(D, nden, 1)
     u = xhat - Xhat
-    u = linalg.norm(u, ord=2, axis=0) ** 2 / (2 * h**2)
+    u = linalg.norm(u, ord=2, axis=0) ** 2 / (2 * h ** 2)
     px = np.exp(-u).sum(axis=1) / (N * h * np.sqrt(2 * np.pi))
     return px
 

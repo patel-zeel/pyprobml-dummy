@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-DEFAULT_WIDTH = 5.29
+DEFAULT_WIDTH = 6.0
 GOLDEN_MEAN = (5 ** 0.5 - 1.0) / 2.0  # Aesthetic ratio
 DEFAULT_HEIGHT = DEFAULT_WIDTH * GOLDEN_MEAN
 # SPLINE_COLOR = 'gray'
@@ -9,7 +9,7 @@ DEFAULT_HEIGHT = DEFAULT_WIDTH * GOLDEN_MEAN
 def latexify(n_figures=1, fig_width=DEFAULT_WIDTH, fig_height=DEFAULT_HEIGHT):
 
     if n_figures > 1:
-        DEFAULT_WIDTH = fig_width / n_figures
+        fig_width = fig_width / n_figures
 
     # use TrueType fonts so they are embedded
     # https://stackoverflow.com/questions/9054884/how-to-embed-fonts-in-pdfs-produced-by-matplotlib
@@ -17,7 +17,7 @@ def latexify(n_figures=1, fig_width=DEFAULT_WIDTH, fig_height=DEFAULT_HEIGHT):
     plt.rcParams["pdf.fonttype"] = 42
 
     # Font sizes
-    SIZE_SMALL = 12
+    SIZE_SMALL = 9
     # SIZE_MEDIUM = 14
     SIZE_LARGE = 24
     # https://stackoverflow.com/a/39566040
