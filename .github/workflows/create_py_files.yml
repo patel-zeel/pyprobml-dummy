@@ -1,0 +1,32 @@
+name: Convert py files to colab
+
+on: 
+  push:
+    branches:
+    - notebook_first_trial
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: 'notebook_first_trial'
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        # Semantic version range syntax or exact version of a Python version
+        python-version: '3.8'
+    
+    - name: install jupyter
+      run: |
+        pip install jupyter
+    - name: convert ipynb to py
+      run: |
+        jupyter nbconvert --to python notebooks/*.ipynb --output-dir=auto_generated_scripts
+
+    - name: push
+      uses: mikeal/publish-to-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH_NAME: 'notebook_first_trial' #optional defaults to master
