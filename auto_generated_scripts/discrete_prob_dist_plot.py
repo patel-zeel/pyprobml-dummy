@@ -26,7 +26,6 @@ try:
 except:
     get_ipython().run_line_magic('pip', 'install seaborn')
     import seaborn as sns
-get_ipython().run_line_magic('matplotlib', 'notebook')
 
 
 # In[2]:
