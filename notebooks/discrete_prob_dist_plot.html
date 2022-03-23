@@ -255,7 +255,8 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Discrete Probability Distribution Plot<a class="headerlink" href="#discrete-probability-distribution-plot" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">jax</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="o">%</span><span class="k">pip</span> install jax
@@ -267,12 +268,6 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="k">except</span><span class="p">:</span>
     <span class="o">%</span><span class="k">pip</span> install matplotlib
     <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-    
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">get_ipython</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">pip</span> install IPython
-    <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">get_ipython</span>
 </pre></div>
 </div>
 </div>
@@ -281,9 +276,10 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set this to False manually if running this notebook locally in stand-alone mode (without cloning the repo). </span>
 <span class="c1"># When nb_shell = False, figures will not be saved to disk.</span>
-<span class="n">nb_shell</span> <span class="o">=</span> <span class="s2">&quot;ipykernel&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">())</span>
 
-<span class="k">if</span> <span class="n">nb_shell</span><span class="p">:</span>
+<span class="n">dev_mode</span> <span class="o">=</span> <span class="s2">&quot;DEV_MODE&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span>
+
+<span class="k">if</span> <span class="n">dev_mode</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">sys</span>
 
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../scripts&quot;</span><span class="p">)</span>
@@ -309,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">nb_shell</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">save_name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">dev_mode</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">save_name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">format_axes</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
         <span class="n">pml</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_name</span><span class="p">)</span>
 
@@ -323,12 +319,8 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>saving image to /home/patel_zeel/pyprobml-fork/scripts/../figures/uniform_histogram_latexified.pdf
-saving image to /home/patel_zeel/pyprobml-fork/scripts/../figures/delta_histogram_latexified.pdf
-</pre></div>
-</div>
+<img alt="../_images/discrete_prob_dist_plot_3_1.png" src="../_images/discrete_prob_dist_plot_3_1.png" />
 <img alt="../_images/discrete_prob_dist_plot_3_2.png" src="../_images/discrete_prob_dist_plot_3_2.png" />
-<img alt="../_images/discrete_prob_dist_plot_3_3.png" src="../_images/discrete_prob_dist_plot_3_3.png" />
 </div>
 </div>
 <div class="section" id="demo">
@@ -349,9 +341,8 @@ saving image to /home/patel_zeel/pyprobml-fork/scripts/../figures/delta_histogra
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "c4ae6cbe33a143999c9f3ff0aa6422eb", "version_major": 2, "version_minor": 0}
-</script><img alt="../_images/discrete_prob_dist_plot_5_1.png" src="../_images/discrete_prob_dist_plot_5_1.png" />
-</div>
+{"model_id": "d89f549a064449519cf85090a58efa9b", "version_major": 2, "version_minor": 0}
+</script></div>
 </div>
 </div>
 </div>
