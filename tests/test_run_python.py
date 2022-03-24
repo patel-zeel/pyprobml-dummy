@@ -4,6 +4,7 @@ import subprocess
 from glob import glob
 
 os.environ["DEV_MODE"] = "True"
+os.environ["TEST_MODE"] = "True"
 scripts = glob("auto_generated_scripts/*.py")
 
 
