@@ -42,7 +42,7 @@ if dev_mode:
     import pyprobml_utils as pml
     from latexify import latexify
 
-    latexify(scale_factor=2, fig_height=1.5)
+    latexify(width_scale_factor=2, fig_height=1.5)
 
 
 # In[3]:
