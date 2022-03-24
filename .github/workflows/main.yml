@@ -20,18 +20,19 @@ jobs:
       with:
         # Semantic version range syntax or exact version of a Python version
         python-version: '3.8'
-    
-    - name: install jupyter
+
+    - name: Install jupyter and pytest
       run: |
-        pip install jupyter
+        pip install jupyter pytest
+
     - name: convert ipynb to py
       run: |
         jupyter nbconvert --to python notebooks/*.ipynb --output-dir=auto_generated_scripts
-    
-    - name: Run tests on py files and notebooks
+
+    - name: Run tests on notebooks and scripts
       run: |
         pytest
-    
+
     - name: Build the book
       run: |
         pip install -r requirements.txt
