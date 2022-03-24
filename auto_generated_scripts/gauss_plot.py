@@ -11,7 +11,7 @@ import os
 try:
     import jax
 except:
-    get_ipython().run_line_magic('pip', 'install jax')
+    get_ipython().run_line_magic('pip', 'install jax jaxlib')
     import jax
 
 import jax.numpy as jnp
