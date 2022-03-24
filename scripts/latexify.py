@@ -10,7 +10,7 @@ DEFAULT_HEIGHT = DEFAULT_WIDTH * GOLDEN_MEAN
 def latexify(width_scale_factor=1, fig_width=None, fig_height=None):
     """
     width_scale_factor: float, with this factor the figure will be scaled
-    fig_width: float, width of the figure in inches (if this is specified, scale_factor is ignored)
+    fig_width: float, width of the figure in inches (if this is specified, width_scale_factor is ignored)
     fig_height: float, height of the figure in inches
     """
     if fig_width is None:
