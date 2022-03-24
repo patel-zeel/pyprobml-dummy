@@ -1,4 +1,4 @@
-name: Convert py files to colab
+name: Main workflow
 
 on: 
   push:
@@ -9,7 +9,7 @@ on:
     - notebook_first_trial
 
 jobs:
-  build:
+  test_run:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -27,18 +27,26 @@ jobs:
     - name: convert ipynb to py
       run: |
         jupyter nbconvert --to python notebooks/*.ipynb --output-dir=auto_generated_scripts
+    
+    - name: Run tests on py files and notebooks
+      run: |
+        pytest
+    
+    - name: Build the book
+      run: |
+        pip install -r requirements.txt
+        jupyter-book build ./
 
-    - name: push
+    - name: Push py files to github
       uses: mikeal/publish-to-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH_NAME: 'notebook_first_trial' #optional defaults to master
+      if: github.event_name == 'push'  # Don't run on pull requests
     
-    - name: Trigger next workflow
-      if: success()
-      uses: peter-evans/repository-dispatch@v1
+    - name: Push jupyter-book to gh-pages
+      uses: peaceiris/actions-gh-pages@v3.6.1
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        # repository: ${{ github.repository }}
-        event-type: trigger-workflow-2
-        # client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: _build/html
+      if: github.event_name == 'push'  # Don't run on pull requests
