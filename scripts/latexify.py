@@ -6,14 +6,14 @@ DEFAULT_HEIGHT = DEFAULT_WIDTH * GOLDEN_MEAN
 # SPLINE_COLOR = 'gray'
 
 
-def latexify(scale_factor=1, fig_width=None, fig_height=None):
+def latexify(width_scale_factor=1, fig_width=None, fig_height=None):
     """
-    scaele_factor: float, with this factor the figure will be scaled
-    fig_width: float, width of the figure in inches (if this is specified, scale_factor is ignored)
+    width_scale_factor: float, with this factor the figure will be scaled
+    fig_width: float, width of the figure in inches (if this is specified, width_scale_factor is ignored)
     fig_height: float, height of the figure in inches
     """
     if fig_width is None:
-        fig_width = DEFAULT_WIDTH / scale_factor
+        fig_width = DEFAULT_WIDTH / width_scale_factor
 
     # use TrueType fonts so they are embedded
     # https://stackoverflow.com/questions/9054884/how-to-embed-fonts-in-pdfs-produced-by-matplotlib
@@ -31,7 +31,7 @@ def latexify(scale_factor=1, fig_width=None, fig_height=None):
     plt.rc("xtick", labelsize=SIZE_SMALL)  # fontsize of the tick labels
     plt.rc("ytick", labelsize=SIZE_SMALL)  # fontsize of the tick labels
     plt.rc("legend", fontsize=SIZE_SMALL)  # legend fontsize
-    plt.rc("figure", titlesize=SIZE_LARGE)  # fontsize of the figure title
+    plt.rc("figure", titlesize=SIZE_SMALL)  # fontsize of the figure title
 
     # latexify: https://nipunbatra.github.io/blog/visualisation/2014/06/02/latexify.html
     plt.rcParams["backend"] = "ps"
