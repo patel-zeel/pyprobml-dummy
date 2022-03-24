@@ -5,3 +5,5 @@ parts:
     chapters:
       - file: notebooks/discrete_prob_dist_plot.ipynb
       - file: notebooks/bimodal_dist_plot.ipynb
+      - file: notebooks/gauss_plot.ipynb
+      - file: notebooks/quantile_plot.ipynb
