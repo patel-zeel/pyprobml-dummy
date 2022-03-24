@@ -58,8 +58,8 @@ def make_graph(probs, save_name):
     plt.xlim([min(x) - 0.5, max(x) + 0.5])
     plt.xticks(x)
     plt.yticks(jnp.linspace(0, 1, 5))
-    plt.xlabel('$x$')
-    plt.ylabel('$p(x)$')
+    plt.xlabel("$x$")
+    plt.ylabel("$Pr(X=x)$")
     sns.despine()
     if dev_mode and len(save_name) > 0:
         pml.savefig(save_name)

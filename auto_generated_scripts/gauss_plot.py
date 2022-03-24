@@ -45,35 +45,31 @@ if dev_mode:
     latexify(width_scale_factor=2, fig_height=1.5)
 
 
-# In[4]:
+# In[3]:
 
 
 # Plot pdf and cdf of standard normal
 
 x = jnp.linspace(-3, 3, 500)
 random_var = norm
-fig, ax = plt.subplots()
-ax.plot(x, random_var.pdf(x))
-plt.title("Gaussian pdf")
-sns.despine()
-
-if dev_mode:
-    pml.save_fig("gaussian1d.pdf")
-
-# plt.show()
-
-fig, ax = plt.subplots()
-ax.plot(x, random_var.cdf(x))
-plt.title("Gaussian cdf")
-sns.despine()
-if dev_mode:
-    pml.save_fig("gaussianCdf.pdf")
-
-# plt.show()
 
 
-# In[ ]:
+def make_graph(data, save_name):
+    fig, ax = plt.subplots()
+    ax.plot(data["x"], data["y"])
+    # plt.title("Gaussian pdf")
+    plt.xlabel("x")
+    plt.ylabel(data["ylabel"])
+    sns.despine()
+    if dev_mode:
+        pml.save_fig(save_name)
 
 
-
+make_graph(
+    {"x": x, "y": random_var.pdf(x), "ylabel": "$p(x)$"}, "gaussian1d_latexified.pdf"
+)
+make_graph(
+    {"x": x, "y": random_var.cdf(x), "ylabel": "$Pr(X \leq x)$"},
+    "gaussianCdf_latexified.pdf",
+)
 

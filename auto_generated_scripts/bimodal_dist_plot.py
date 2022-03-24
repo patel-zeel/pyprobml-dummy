@@ -30,7 +30,7 @@ from scipy.stats import norm
 try:
     import jax
 except:
-    get_ipython().run_line_magic('pip', 'install jax')
+    get_ipython().run_line_magic('pip', 'install jax jaxlib')
     import jax
 
 
@@ -44,6 +44,7 @@ dev_mode = "DEV_MODE" in os.environ
 
 if dev_mode:
     import sys
+
     sys.path.append("scripts")
     import pyprobml_utils as pml
     from latexify import latexify
@@ -58,20 +59,20 @@ if dev_mode:
 LINE_WIDTH = 2
 mu = [0, 2]
 sigma = [1, 0.05]
-n = [norm(loc=mu[i], scale=sigma[i]) for i in range(2)]
-w = [0.5, 0.5]
+distributions = [norm(loc=mu[i], scale=sigma[i]) for i in range(2)]
+weights = [0.5, 0.5]
 
 # Define a set of x points for graphing.
 x = jnp.linspace(-2, 2 * mu[1], 600)
 
 # Combine the two distributions by their weights, evaluated at the x points.
-p = sum(w[i] * n[i].pdf(x) for i in range(2))
+p = sum(weights[i] * distributions[i].pdf(x) for i in range(2))
 
 # Calculate the mean of the final distribution.
 mean_p = jnp.mean(x * p)
 
 # Plot the final distribution and its mean.
-p = sum(w[i] * n[i].pdf(x) for i in range(2))
+p = sum(weights[i] * distributions[i].pdf(x) for i in range(2))
 plt.plot(
     x,
     p,
@@ -97,8 +98,10 @@ if dev_mode:
 
 
 # Another example, with two modes
-def make_graph(ax,data,color=None, linestyle=None,label=None,xlabel=None,ylabel=None):
-    
+def make_graph(
+    ax, data, color=None, linestyle=None, label=None, xlabel=None, ylabel=None
+):
+
     LINE_WIDTH = 2
     x = data["x"]
     weights = data["weights"]
@@ -107,29 +110,30 @@ def make_graph(ax,data,color=None, linestyle=None,label=None,xlabel=None,ylabel=
     ax.plot(
         x,
         p,
-        color = color,
+        color=color,
         linestyle=linestyle,
         linewidth=LINE_WIDTH,
-        label= label,
+        label=label,
     )
     plt.legend(bbox_to_anchor=(1, 1))
     if xlabel:
         plt.xlabel("$x$")
     if ylabel:
         plt.ylabel("$p(x)$")
-    
-#data for both distributions
+
+
+# data for both distributions
 data = dict()
 mu = [0, 2]
 sigma = [0.5, 0.5]
-weights = [0.5,0.5]
+weights = [0.5, 0.5]
 data = {
-    "distributions" : [norm(loc=mu[i], scale=sigma[i]) for i in range(2)],
+    "distributions": [norm(loc=mu[i], scale=sigma[i]) for i in range(2)],
     "weights": weights,
-    "x": jnp.linspace(-2, 2 * mu[1], 600)
+    "x": jnp.linspace(-2, 2 * mu[1], 600),
 }
 
-#plot first distribution
+# plot first distribution
 plt.figure()
 ax = plt.gca()
 
@@ -137,25 +141,33 @@ ax = plt.gca()
 mu = [0]
 sigma = [0.5]
 data1 = {
-    "distributions" : [norm(loc=mu[i], scale=sigma[i]) for i in range(1)],
+    "distributions": [norm(loc=mu[i], scale=sigma[i]) for i in range(1)],
     "weights": [data["weights"][0]],
-    "x": data["x"]
+    "x": data["x"],
 }
-make_graph(ax,data1,color="g",linestyle="dashdot",label="$0.5\mathcal{N}(x|0,0.5)$")
+make_graph(ax, data1, color="g", linestyle="dashdot", label="$0.5\mathcal{N}(x|0,0.5)$")
 
-#plot second distribution
+# plot second distribution
 data2 = dict()
 mu = [2]
 sigma = [0.5]
 data2 = {
-    "distributions" : [norm(loc=mu[i], scale=sigma[i]) for i in range(1)],
+    "distributions": [norm(loc=mu[i], scale=sigma[i]) for i in range(1)],
     "weights": [data["weights"][0]],
-    "x": data["x"]
+    "x": data["x"],
 }
-make_graph(ax,data2,color="r",linestyle="dashdot",label="$0.5\mathcal{N}(x|2,0.5)$")
+make_graph(ax, data2, color="r", linestyle="dashdot", label="$0.5\mathcal{N}(x|2,0.5)$")
 
 # Plot both distribution
-make_graph(ax,data,color="k",linestyle="dashed",label="$0.5\mathcal{N}(x|0,0.5) + 0.5\mathcal{N}(x|2,0.5)$",xlabel="$x$",ylabel="$p(x)$")
+make_graph(
+    ax,
+    data,
+    color="k",
+    linestyle="dashed",
+    label="$0.5\mathcal{N}(x|0,0.5) + 0.5\mathcal{N}(x|2,0.5)$",
+    xlabel="$x$",
+    ylabel="$p(x)$",
+)
 
 # format axes
 sns.despine()
