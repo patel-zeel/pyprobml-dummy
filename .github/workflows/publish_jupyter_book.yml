@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - notebook_first_trial
+  pull_request:
+    branches:
+      - notebook_first_trial
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:

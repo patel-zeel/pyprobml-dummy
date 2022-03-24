@@ -4,6 +4,9 @@ on:
   push:
     branches:
     - notebook_first_trial
+  pull_request:
+    branches:
+    - notebook_first_trial
 
 jobs:
   build:
