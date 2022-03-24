@@ -30,3 +30,11 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH_NAME: 'notebook_first_trial' #optional defaults to master
+    - name: Trigger next workflow
+      if: success()
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.REPO_GHA_PAT }}
+        repository: ${{ github.repository }}
+        event-type: trigger-workflow-2
+        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
