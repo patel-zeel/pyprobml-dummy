@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 
 DEFAULT_WIDTH = 6.0
@@ -35,6 +36,7 @@ def latexify(width_scale_factor=1, fig_width=None, fig_height=None):
 
     # latexify: https://nipunbatra.github.io/blog/visualisation/2014/06/02/latexify.html
     plt.rcParams["backend"] = "ps"
-    plt.rc("text", usetex=True)
+    if not "TEST_MODE" in os.environ:
+        plt.rc("text", usetex=True)
     plt.rc("font", family="serif")
     plt.rc("figure", figsize=(fig_width, fig_height))

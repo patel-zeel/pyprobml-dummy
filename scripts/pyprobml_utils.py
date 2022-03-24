@@ -39,8 +39,8 @@ def save_fig(fname, *args, **kwargs):
     fname_full = os.path.join(figdir, fname)
     print("saving image to {}".format(fname_full))
 
-    # plt.tight_layout()
-    plt.savefig(fname_full, bbox_inches="tight", *args, **kwargs)
+    if not "TEST_MODE" in os.environ:
+        plt.savefig(fname_full, bbox_inches="tight", *args, **kwargs)
 
 
 def savefig(fname, *args, **kwargs):

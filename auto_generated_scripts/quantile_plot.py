@@ -11,7 +11,7 @@ import os
 try:
     import jax
 except:
-    get_ipython().run_line_magic('pip', 'install jax')
+    get_ipython().run_line_magic('pip', 'install jax jaxlib')
     import jax
 
 import jax.numpy as jnp
@@ -38,11 +38,11 @@ dev_mode = "DEV_MODE" in os.environ
 if dev_mode:
     import sys
 
-    sys.path.append("../scripts")
+    sys.path.append("scripts")
     import pyprobml_utils as pml
     from latexify import latexify
 
-    latexify(scale_factor=2, fig_height=1.5)
+    latexify(width_scale_factor=2, fig_height=1.5)
 
 
 # In[3]:
