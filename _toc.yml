@@ -7,3 +7,4 @@ parts:
       - file: notebooks/bimodal_dist_plot.ipynb
       - file: notebooks/gauss_plot.ipynb
       - file: notebooks/quantile_plot.ipynb
+      - file: notebooks/binom_dist_plot.ipynb
