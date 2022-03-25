@@ -17,8 +17,8 @@ jobs:
         ref: 'notebook_first_trial'
     - uses: psf/black@stable
       with:
-      options: "--check --verbose"
-      src: "./notebooks"
+        options: "--check --verbose"
+        src: "./notebooks"
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
