@@ -1,1 +1,3 @@
+#!/bin/sh
+
 black notebooks/*.ipynb
