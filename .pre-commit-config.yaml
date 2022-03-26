@@ -2,10 +2,6 @@ repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
-    -   id: check-yaml
-        files: notebooks/
-    -   id: end-of-file-fixer
-        files: notebooks/
     -   id: trailing-whitespace
         files: notebooks/
 
@@ -13,5 +9,5 @@ repos:
     rev: 22.1.0
     hooks:
     -   id: black-jupyter
-        files: notebooks/
         args: [--line-length=120]
+        files: notebooks/

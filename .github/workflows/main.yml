@@ -28,21 +28,32 @@ jobs:
       run: |
         jupyter nbconvert --to python notebooks/*.ipynb --output-dir=auto_generated_scripts
 
-    - name: Run tests on notebooks and scripts
-      run: |
-        pytest
+    # - name: Run tests on notebooks and scripts
+    #   run: |
+    #     pytest
 
-    - name: Build the book
+    # - name: Build the book
+    #   run: |
+    #     pip install -r requirements.txt
+    #     jupyter-book build ./
+    - name: Check it
       run: |
-        pip install -r requirements.txt
-        jupyter-book build ./
+        echo "hello" > hello.txt
 
+    # Commit py files (does not run on pull requests)
+    - name: Commit py files
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add auto_generated_scripts/*.py
+        git commit -m "auto generated py files"
+      if: github.event_name == 'push'  # Don't run on pull requests
+    # Push py files to the repository and commit (does not run on pull requests)
     - name: Push py files to github
-      uses: patel-zeel/publish-to-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH_NAME: 'notebook_first_trial' #optional defaults to master
-        files: 'auto_generated_scripts/*.py'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
       if: github.event_name == 'push'  # Don't run on pull requests
 
     - name: Push jupyter-book to gh-pages
