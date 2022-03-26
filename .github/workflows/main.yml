@@ -1,6 +1,6 @@
 name: Main workflow
 
-on: 
+on:
   push:
     branches:
     - notebook_first_trial
@@ -38,12 +38,13 @@ jobs:
         jupyter-book build ./
 
     - name: Push py files to github
-      uses: mikeal/publish-to-github-action@master
+      uses: patel-zeel/publish-to-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH_NAME: 'notebook_first_trial' #optional defaults to master
+        files: 'auto_generated_scripts/*.py'
       if: github.event_name == 'push'  # Don't run on pull requests
-    
+
     - name: Push jupyter-book to gh-pages
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
