@@ -5,9 +5,9 @@ repos:
     -   id: trailing-whitespace
         files: notebooks\/.*\.ipynb
 
--   repo: https://github.com/psf/black
-    rev: 22.1.0
-    hooks:
-    -   id: black-jupyter
-        args: ["--verbose", "--line-length=120"]
-        files: notebooks\/.*\.ipynb
+# -   repo: https://github.com/psf/black
+#     rev: 22.1.0
+#     hooks:
+#     -   id: black-jupyter
+#         args: ["--verbose", "--line-length=120"]
+#         files: notebooks\/.*\.ipynb
