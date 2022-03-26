@@ -48,7 +48,7 @@ if dev_mode:
 
 # Bar graphs showing a uniform discrete distribution and another with full prob on one value.
 
-x = jnp.arange(1, 5)
+x = jnp.arange(1,5)
 uniform_probs = jnp.repeat(1.0 / len(x), len(x))
 
 
